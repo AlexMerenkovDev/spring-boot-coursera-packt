@@ -1,13 +1,12 @@
 package com.coursera.springboot.webappfrompackt.todo;
 
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+
 @Service
 public class TodoService {
 
@@ -31,6 +30,22 @@ public class TodoService {
     public void addTodo(String username, String description, LocalDate targetDate, boolean isDone){
 
         Todo todo = new Todo(++count, username, description, targetDate, isDone);
+        todos.add(todo);
+    }
+
+    public void deleteById(int id) {
+        Predicate<? super Todo> Predicate = todo -> todo.getId() == id;
+        todos.removeIf(Predicate);
+    }
+
+    public Todo findById(int id) {
+        Predicate<? super Todo> Predicate = todo -> todo.getId() == id;
+        Todo todo = todos.stream().filter(Predicate).findFirst().get();
+        return todo;
+    }
+
+    public void updateById(Todo todo) {
+        deleteById(todo.getId());
         todos.add(todo);
     }
 }
