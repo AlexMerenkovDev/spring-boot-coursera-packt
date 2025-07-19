@@ -11,14 +11,14 @@ public class Todo {
 
     @Size(min = 10, message = "Enter atleast 10 characters")
     private String description;
-    private LocalDate endDate;
+    private LocalDate targetDate;
     private boolean done;
 
     public Todo(int id, String username, String description, LocalDate endDate, boolean done) {
         this.id = id;
         this.username = username;
         this.description = description;
-        this.endDate = endDate;
+        this.targetDate = endDate;
         this.done = done;
     }
 
@@ -28,7 +28,7 @@ public class Todo {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", description='" + description + '\'' +
-                ", endDate=" + endDate +
+                ", endDate=" + targetDate +
                 ", done=" + done +
                 '}';
     }
@@ -57,12 +57,12 @@ public class Todo {
         this.description = description;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDate getTargetDate() {
+        return targetDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setTargetDate(LocalDate targetDate) {
+        this.targetDate = targetDate;
     }
 
     public boolean isDone() {
