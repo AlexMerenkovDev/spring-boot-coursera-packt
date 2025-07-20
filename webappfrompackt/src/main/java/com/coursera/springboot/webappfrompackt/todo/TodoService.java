@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 @Service
@@ -23,8 +24,9 @@ public class TodoService {
                 LocalDate.now().plusYears(2), false));
     }
 
-    public List<Todo> getAllTodosByUsername() {
-        return todos;
+    public List<Todo> getAllTodosByUsername(String username) {
+        Predicate<? super Todo> Predicate = todo -> Objects.equals(todo.getUsername(), username);
+        return todos.stream().filter(Predicate).toList();
     }
 
     public void addTodo(String username, String description, LocalDate targetDate, boolean isDone){
